@@ -3,7 +3,7 @@ import styled from "styled-components"
 import { Link } from "react-router-dom"
 // import Logo from "../assets/logo.svg"
 import Logo2 from "../assets/logo2.svg"
-import styles from '../mystyle.module.css'
+//import styles from '../mystyle.module.css'
 
 const handleSubmit = (event)=>{
     event.preventDefault();
@@ -13,11 +13,10 @@ const handleChange = (event) => {};
 
 
 export default function Register(){
-    return <>
+    return <React.Fragment>
     <FormContainer>
         <form onSubmit={(event)=>handleSubmit(event)}>
             <div className="nrand">
-                <img src={Logo2} alt="Logo"/>
                 <h1>snappy</h1>
             </div>
             <input 
@@ -46,22 +45,33 @@ export default function Register(){
             />
             <button type="submit">Create User</button>
             <span>Already have an account ? 
-                <Link to="./login">Login</Link>
+                <Link to="./login"> Login</Link>
             </span>
         </form>
-    </FormContainer>
-    </>
+        <LogoField>
+          <img src={Logo2}/>
+        </LogoField>
+      </FormContainer>
+  </React.Fragment>
 }
-
+const LogoField = styled.div`
+  height:100%;
+  width: 100%;
+  background-color: #0094FF;
+  justify-content: center;
+  align-items: center;
+  img{
+    margin: 30vh;
+  }
+`;
 const FormContainer = styled.div`
   height: 100vh;
   width: 100vw;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
-  gap: 1rem;
   align-items: center;
-  background-color: #E0E0E0;
+  background-color: #white;
   .brand {
     display: flex;
     align-items: center;
@@ -77,19 +87,19 @@ const FormContainer = styled.div`
   }
 
   form {
+    width: 50vw;
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    background-color: #00000076;
-    border-radius: 2rem;
+    background-color: #white;
     padding: 3rem 5rem;
   }
   input {
     background-color: transparent;
     padding: 1rem;
-    border: 0.1rem solid #4e0eff;
+    border: 0.1rem solid #0094FF;
     border-radius: 0.4rem;
-    color: white;
+    color: black;
     width: 100%;
     font-size: 1rem;
     &:focus {
@@ -98,7 +108,7 @@ const FormContainer = styled.div`
     }
   }
   button {
-    background-color: #4e0eff;
+    background-color: #0094FF;
     color: white;
     padding: 1rem 2rem;
     border: none;
@@ -112,10 +122,10 @@ const FormContainer = styled.div`
     }
   }
   span {
-    color: white;
+    color: black;
     text-transform: uppercase;
     a {
-      color: #4e0eff;
+      color: #blue;
       text-decoration: none;
       font-weight: bold;
     }
