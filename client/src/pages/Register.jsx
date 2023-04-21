@@ -1,9 +1,10 @@
-// handelsubmit const needs to uncomenting to send data to server port
-
 import axios from "axios";
+//Axios is used to communicate with the backend
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
+//The useNavigate hook returns a function that lets you navigate programmatically, in between pages
+
 // import Logo from "../assets/logo.svg";
 import Logo2 from "../assets/logo2.svg";
 //import styles from '../mystyle.module.css';
@@ -29,7 +30,16 @@ export default function Register() {
       confirmPassword: "",
    });
 
+   //The Effect Hook lets us perform side effects in function components
+   useEffect(()=>{
+      //navigate to chat page if values are true and sets on local storage and dont stay in register page
+      if(localStorage.getItem("chat-app-user")){
+         navigate('/')
+      }
+   },[]);
+
    const handleValidation = () => {
+      //Checking the correctness of user inputs
       const { password, confirmPassword, username, email } = values;
       if (password !== confirmPassword) {
          toast.error("password and confirm password should be same.", toastOptions);
@@ -54,17 +64,20 @@ export default function Register() {
       event.preventDefault();
 
       if (handleValidation()) {
-         //  console.log("in validation", registerRoute);
-         const { email, username, password, confirmPassword } = values;
+         const { email, username, password} = values;
          const { data } = await axios.post(registerRoute, {
             username,
             email,
             password,
          });
-         if (data.status === false) toast.error(data.message, toastOptions);
+         if (data.status === false) 
+            toast.error(data.message, toastOptions);
          if (data.status === true) {
             localStorage.setItem("chat-app-user", JSON.stringify(data.user));
+            // The JSON.stringify() static method converts a JavaScript value to a JSON string,
+            // optionally replacing values if a replacer function is specified or optionally including only the specified properties if a replacer array is specified.
             navigate("/");
+            //navigat to chat page
          }
       }
    };
@@ -78,7 +91,7 @@ export default function Register() {
          <FormContainer>
             <form onSubmit={(event) => handleSubmit(event)}>
                <div className="nrand">
-                  <h1>app name</h1>
+                  <h1>Sign in</h1>
                </div>
                <input
                   type="text"
