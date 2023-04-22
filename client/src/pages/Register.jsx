@@ -31,12 +31,10 @@ export default function Register() {
    });
 
    //The Effect Hook lets us perform side effects in function components
-   useEffect(()=>{
+   useEffect(() => {
       //navigate to chat page if values are true and sets on local storage and dont stay in register page
-      if(localStorage.getItem("chat-app-user")){
-         navigate('/')
-      }
-   },[]);
+      localStorage.getItem("chat-app-user") && navigate("/");
+   }, []);
 
    const handleValidation = () => {
       //Checking the correctness of user inputs
@@ -64,14 +62,13 @@ export default function Register() {
       event.preventDefault();
 
       if (handleValidation()) {
-         const { email, username, password} = values;
+         const { email, username, password } = values;
          const { data } = await axios.post(registerRoute, {
             username,
             email,
             password,
          });
-         if (data.status === false) 
-            toast.error(data.message, toastOptions);
+         if (data.status === false) toast.error(data.message, toastOptions);
          if (data.status === true) {
             localStorage.setItem("chat-app-user", JSON.stringify(data.user));
             // The JSON.stringify() static method converts a JavaScript value to a JSON string,
@@ -123,7 +120,7 @@ export default function Register() {
                </span>
             </form>
             <LogoField>
-               <img src={Logo2} />
+               <img src={Logo2} alt="logo" />
             </LogoField>
          </FormContainer>
          <ToastContainer />

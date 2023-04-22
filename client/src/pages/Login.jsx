@@ -28,15 +28,19 @@ export default function Login() {
       password: "",
    });
 
-   
+   //The Effect Hook lets us perform side effects in function components
+   useEffect(() => {
+      //navigate to chat page if values are true and sets on local storage and dont stay in login
+      localStorage.getItem("chat-app-user") && navigate("/");
+   }, []);
 
    const handleValidation = () => {
       //Checking the correctness of user inputs
       const { password, username } = values;
       if (password === "") {
-        toast.error("Username and password required.", toastOptions);
+         toast.error("Username and password required.", toastOptions);
          return false;
-      } else if (username.length === "" ) {
+      } else if (username.length === "") {
          toast.error("Username and password required.", toastOptions);
          return false;
       }
@@ -48,7 +52,7 @@ export default function Login() {
 
       if (handleValidation()) {
          //  console.log("in validation", loginRoute);
-         const { username, password} = values;
+         const { username, password } = values;
          const { data } = await axios.post(loginRoute, {
             username,
             password,
@@ -57,7 +61,7 @@ export default function Login() {
          if (data.status === true) {
             localStorage.setItem("chat-app-user", JSON.stringify(data.user));
             // The JSON.stringify() static method converts a JavaScript value to a JSON string,
-         // optionally replacing values if a replacer function is specified or optionally including only the specified properties if a replacer array is specified.
+            // optionally replacing values if a replacer function is specified or optionally including only the specified properties if a replacer array is specified.
             navigate("/");
             //navigat to chat page
          }
@@ -67,14 +71,6 @@ export default function Login() {
    const handleChange = (event) => {
       setValues({ ...values, [event.target.name]: event.target.value });
    };
-
-   //The Effect Hook lets us perform side effects in function components
-   useEffect(()=>{
-      //navigate to chat page if values are true and sets on local storage and dont stay in login
-      if(localStorage.getItem("chat-app-user")){
-         navigate('/')
-      }
-   },[]);
 
    return (
       <React.Fragment>
@@ -88,7 +84,7 @@ export default function Login() {
                   placeholder="Username"
                   name="username"
                   onChange={(e) => handleChange(e)}
-                  min = "3"
+                  min="3"
                />
                <input
                   type="password"
@@ -102,7 +98,7 @@ export default function Login() {
                </span>
             </form>
             <LogoField>
-               <img src={Logo2} />
+               <img src={Logo2} alt="Logo" />
             </LogoField>
          </FormContainer>
          <ToastContainer />
