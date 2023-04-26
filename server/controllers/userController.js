@@ -14,7 +14,10 @@ module.exports.register = async (req, res, next) => {
       const emailCheck = await User.findOne({ email });
       if (emailCheck) return res.json({ message: "Email already used", status: false });
 
+      // hash password
       const hashedPassword = await bcrypt.hash(password, 10);
+
+      // create user
       const user = await User.create({
          email,
          username,
@@ -33,11 +36,11 @@ module.exports.login = async (req, res, next) => {
       const { username, password } = req.body;
       const user = await User.findOne({ username });
 
-      // check user
+      // check username
       if (!user)
          return res.json({ message: "Incorrent username or password", status: false });
 
-      // check email
+      // check password
       const isPasswordValid = await bcrypt.compare(password, user.password);
       if (!isPasswordValid)
          return res.json({ message: "Incorrent username or password", status: false });
