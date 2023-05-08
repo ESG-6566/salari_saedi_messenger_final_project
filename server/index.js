@@ -7,9 +7,32 @@ const app = express();
 //* Swagger
 const swaggerjsdoc = require("swagger-jsdoc");
 const swaggerui = require("swagger-ui-express");
-const options = require("./utils/swaggerOptions");
+const options = {
+   definition: {
+      openapi: "3.0.0",
+      info: {
+         title: "Chat Express API with Swagger",
+         version: "1.0.0",
+         description: "",
+         contact: {
+            name: "Possibility of user registration and login, Ability to send messages to users",
+            url: "arif.com",
+            email: "info@gmail.com",
+         },
+      },
+      servers: [
+         {
+            url: "http://localhost:5000/",
+         },
+      ],
+   },
+   // path to the API docs
+   apis: ["./api/*.yaml"],
+};
+// initialize swagger-jsdoc
 const spacs = swaggerjsdoc(options);
-app.use("/api-docs", swaggerui.serve, swaggerui.setup(spacs));
+// use swagger-Ui-express for your app documentation endpoint
+app.use("/docs", swaggerui.serve, swaggerui.setup(spacs));
 
 //* Load config
 require("dotenv").config({ path: "./.env" });

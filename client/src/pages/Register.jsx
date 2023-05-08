@@ -116,7 +116,7 @@ export default function Register() {
                />
                <button type="submit">Create User</button>
                <span>
-                  Already have an account ?<Link to="./login"> Login</Link>
+                  Already have an account ?<Link to="login"> Login</Link>
                </span>
             </form>
             <LogoField>

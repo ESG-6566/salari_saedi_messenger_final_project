@@ -13,7 +13,7 @@ const options = {
       },
       servers: [
          {
-            url: "http://localhost:3000/",
+            url: "http://localhost:5000/",
          },
       ],
       paths: {
@@ -21,15 +21,9 @@ const options = {
             post: {
                tags: ["user"],
                summary: "Create user",
-               description: "This can only be done by the logged in user",
                operationId: "createUser",
                requestBody: {
                   description: "Created user object",
-                  content: {
-                     "application/json": {
-                        schema: { $ref: "#/components/schemas/userController" },
-                     },
-                  },
                },
             },
          },
