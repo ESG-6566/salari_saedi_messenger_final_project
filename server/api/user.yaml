@@ -18,7 +18,7 @@ paths:
                   schema:
                      $ref: "#/components/schemas/User"
          responses:
-            default:
+            "200":
                description: successful operation
                content:
                   application/json:
@@ -27,7 +27,17 @@ paths:
                   application/xml:
                      schema:
                         $ref: "#/components/schemas/User"
-                
+   /login:
+      get:
+         tags:
+            - user
+         summary: Logs user into the system
+         operationId: loginUser
+         description: ""
+         parameters:
+            - name: username
+            - name: password
+
 components:
    schemas:
       User:
@@ -48,5 +58,8 @@ components:
             isAvatarImageSet:
                type: boolean
                example: false
+            createdAt:
+               type: string
+               example: "2023-05-10T08:33:48.254+00:00"
          xml:
             name: user

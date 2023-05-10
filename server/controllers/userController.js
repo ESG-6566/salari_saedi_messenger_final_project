@@ -3,6 +3,7 @@ const bcrypt = require("bcrypt");
 
 module.exports.register = async (req, res, next) => {
    try {
+      console.log(req.body);
       const { username, email, password } = req.body;
       const usernameCheck = await User.findOne({ username });
 
@@ -27,12 +28,14 @@ module.exports.register = async (req, res, next) => {
       delete user.password;
       return res.json({ status: true, user });
    } catch (error) {
+      console.log(error);
       next(error);
    }
 };
 
 module.exports.login = async (req, res, next) => {
    try {
+      console.log(req.body);
       const { username, password } = req.body;
       const user = await User.findOne({ username });
 
@@ -48,6 +51,7 @@ module.exports.login = async (req, res, next) => {
       delete user.password;
       return res.json({ status: true, user });
    } catch (error) {
+        console.log(error);
       next(error);
    }
 };
