@@ -1,10 +1,19 @@
-import React from "react"
-import styled from "styled-components"
-import { Link } from "react-router-dom"
+import { useEffect, useState } from 'react';
+import Axios from 'axios'
+import React from "react";
+import ReactDOM from "react-dom";
 
-export default function Test(){
-  return <div>
 
-  </div>
+function App() {
+  return (
+    <div className="App">
+      <input type="file" id="files" class="hidden"/>
+<label for="files">Select file</label>
+
+    </div>
+  );
 }
 
+
+
+export default App;

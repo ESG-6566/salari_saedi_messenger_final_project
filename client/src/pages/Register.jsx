@@ -7,12 +7,13 @@ import { Link, useNavigate } from "react-router-dom";
 
 // import Logo from "../assets/logo.svg";
 import Logo2 from "../assets/logo2.svg";
-//import styles from '../mystyle.module.css';
 import { ToastContainer, toast } from "react-toastify";
+//React-Toastify allows you to add notifications to your app with ease. No more nonsense!
 import "react-toastify/dist/ReactToastify.css";
 import { registerRoute } from "../utils/APIRoutes";
 
 export default function Register() {
+
    const navigate = useNavigate();
 
    const toastOptions = {
@@ -22,6 +23,7 @@ export default function Register() {
       draggable: true,
       theme: "dark",
    };
+   //Defining options for `toastify` module
 
    const [values, setValues] = useState({
       username: "",
@@ -30,11 +32,11 @@ export default function Register() {
       confirmPassword: "",
    });
 
-   //The Effect Hook lets us perform side effects in function components
-   useEffect(() => {
-      //navigate to chat page if values are true and sets on local storage and dont stay in register page
-      localStorage.getItem("chat-app-user") && navigate("/");
-   }, []);
+   // //The Effect Hook lets us perform side effects in function components
+   // useEffect(() => {
+   //    //navigate to chat page if values are true and sets on local storage and dont stay in register page
+   //    localStorage.getItem("chat-app-user") && navigate("/");
+   // }, []);
 
    const handleValidation = () => {
       //Checking the correctness of user inputs
@@ -59,6 +61,8 @@ export default function Register() {
    };
 
    const handleSubmit = async (event) => {
+      //react async is used in API calls
+      
       event.preventDefault();
 
       if (handleValidation()) {
@@ -88,7 +92,7 @@ export default function Register() {
          <FormContainer>
             <form onSubmit={(event) => handleSubmit(event)}>
                <div className="nrand">
-                  <h1>Sign in</h1>
+                  <h1>Sign up</h1>
                </div>
                <input
                   type="text"
@@ -116,7 +120,7 @@ export default function Register() {
                />
                <button type="submit">Create User</button>
                <span>
-                  Already have an account ?<Link to="login"> Login</Link>
+                  Already have an account ?<Link to="/login"> Login</Link>
                </span>
             </form>
             <LogoField>

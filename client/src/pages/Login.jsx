@@ -7,8 +7,8 @@ import { Link, useNavigate } from "react-router-dom";
 
 // import Logo from "../assets/logo.svg";
 import Logo2 from "../assets/logo2.svg";
-//import styles from '../mystyle.module.css';
 import { ToastContainer, toast } from "react-toastify";
+//React-Toastify allows you to add notifications to your app with ease. No more nonsense!
 import "react-toastify/dist/ReactToastify.css";
 import { loginRoute } from "../utils/APIRoutes";
 
@@ -22,17 +22,18 @@ export default function Login() {
       draggable: true,
       theme: "dark",
    };
+   //Defining options for `toastify` module
 
    const [values, setValues] = useState({
       username: "",
       password: "",
    });
 
-   //The Effect Hook lets us perform side effects in function components
-   useEffect(() => {
-      //navigate to chat page if values are true and sets on local storage and dont stay in login
-      localStorage.getItem("chat-app-user") && navigate("/");
-   }, []);
+   // //The Effect Hook lets us perform side effects in function components
+   // useEffect(() => {
+   //    //navigate to chat page if values are true and sets on local storage and dont stay in login
+   //    localStorage.getItem("chat-app-user") && navigate("/");
+   // }, []);
 
    const handleValidation = () => {
       //Checking the correctness of user inputs
@@ -48,6 +49,8 @@ export default function Login() {
    };
 
    const handleSubmit = async (event) => {
+      //react async is used in API calls
+      
       event.preventDefault();
 
       if (handleValidation()) {
@@ -94,7 +97,7 @@ export default function Login() {
                />
                <button type="submit">Enter</button>
                <span>
-                  Don't have an account ?<Link to="./register"> Sign in</Link>
+                  Don't have an account ?<Link to="/register"> Sign up</Link>
                </span>
             </form>
             <LogoField>
