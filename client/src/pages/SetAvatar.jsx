@@ -1,32 +1,47 @@
-import React, { useEffect, useState } from "react";
-import styled from "styled-components";
 import axios from "axios";
-import { Buffer } from "buffer";
-import loader from "../assets/loader.gif";
+//Axios is used to communicate with the backend
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
+import { Link, useNavigate } from "react-router-dom";
+//The useNavigate hook returns a function that lets you navigate programmatically, in between pages
 import { ToastContainer, toast } from "react-toastify";
+//React-Toastify allows you to add notifications to your app with ease. No more nonsense!
 import "react-toastify/dist/ReactToastify.css";
-import { useNavigate } from "react-router-dom";
-import { setAvatarRoute } from "../utils/APIRoutes";
+import loader from "../assets/loader.gif"
+import {setAvatarRoute} from "../utils/APIRoutes"
+import {Buffer} from "buffer";
+import {LogoField} from "./components/Logo field";
+//a cpmponent for showing application Logo
+import {FormContainer} from "./components/User data field style";
+//a style cpmponent for user inputs form
+import normalPicture from "../assets/pexels.jpg";
+
 export default function SetAvatar() {
-  const api = `https://api.multiavatar.com/4645646`;
+
   const navigate = useNavigate();
-  const [avatars, setAvatars] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [selectedAvatar, setSelectedAvatar] = useState(undefined);
+
   const toastOptions = {
+    //Defining options for `toastify` module
     position: "bottom-right",
     autoClose: 8000,
     pauseOnHover: true,
     draggable: true,
     theme: "dark",
-  };
+ };
 
-  useEffect(async () => {
-    if (!localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY))
-      navigate("/login");
-  }, []);
+  const randomAvatarAPI = `https://source.boringavatars.com/beam`;
+  //Geting random avatar picture from "api.multiavatar.com"
+  const [avatars,setAvatars] = useState([]);
+  //Hooks are a new addition in React 16.8. They let us use state and other React features without writing a class.
+  const [isLoading,setIsLoading] = useState(true);
+  const [selectedAvatar,setSelectedAvatar] = useState(undefined);
+
+  const changeAvatarHandler = async (event) => {
+    randomAvatarAPI = `https://source.boringavatars.com/beam`;
+  }
 
   const setProfilePicture = async () => {
+    //react async is used in API calls
     if (selectedAvatar === undefined) {
       toast.error("Please select an avatar", toastOptions);
     } else {
@@ -56,7 +71,7 @@ export default function SetAvatar() {
     const data = [];
     for (let i = 0; i < 4; i++) {
       const image = await axios.get(
-        `${api}/${Math.round(Math.random() * 1000)}`
+        `${randomAvatarAPI}/${Math.round(Math.random() * 1000)}`
       );
       const buffer = new Buffer(image.data);
       data.push(buffer.toString("base64"));
@@ -64,97 +79,30 @@ export default function SetAvatar() {
     setAvatars(data);
     setIsLoading(false);
   }, []);
+  
   return (
-    <>
-      {isLoading ? (
-        <Container>
-          <img src={loader} alt="loader" className="loader" />
-        </Container>
-      ) : (
-        <Container>
-          <div className="title-container">
-            <h1>Pick an Avatar as your profile picture</h1>
-          </div>
-          <div className="avatars">
-            {avatars.map((avatar, index) => {
-              return (
-                <div
-                  className={`avatar ${
-                    selectedAvatar === index ? "selected" : ""
-                  }`}
-                >
-                  <img
-                    src={`data:image/svg+xml;base64,${avatar}`}
-                    alt="avatar"
-                    key={avatar}
-                    onClick={() => setSelectedAvatar(index)}
-                  />
-                </div>
-              );
-            })}
-          </div>
-          <button onClick={setProfilePicture} className="submit-btn">
-            Set as Profile Picture
-          </button>
-          <ToastContainer />
-        </Container>
-      )}
-    </>
-  );
+
+    <FormContainer>
+      <form>
+        <div className="title-container">
+          <h1>Profile picture</h1>
+        </div>
+        <img className="profile-picture"
+          src={normalPicture}
+          alt="avatar"
+        />
+        
+        <button 
+          className="change-avatar-button"
+          onClick={changeAvatarHandler}
+          >change picture
+        </button>
+        
+        <button onClick={setProfilePicture} className="submit-btn">Set as Profile Picture</button>
+        <ToastContainer />
+      </form>
+      <LogoField/>
+    </FormContainer>
+
+  )
 }
-
-const Container = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  gap: 3rem;
-  background-color: #131324;
-  height: 100vh;
-  width: 100vw;
-
-  .loader {
-    max-inline-size: 100%;
-  }
-
-  .title-container {
-    h1 {
-      color: white;
-    }
-  }
-  .avatars {
-    display: flex;
-    gap: 2rem;
-
-    .avatar {
-      border: 0.4rem solid transparent;
-      padding: 0.4rem;
-      border-radius: 5rem;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      transition: 0.5s ease-in-out;
-      img {
-        height: 6rem;
-        transition: 0.5s ease-in-out;
-      }
-    }
-    .selected {
-      border: 0.4rem solid #4e0eff;
-    }
-  }
-  .submit-btn {
-    background-color: #4e0eff;
-    color: white;
-    padding: 1rem 2rem;
-    border: none;
-    font-weight: bold;
-    cursor: pointer;
-    border-radius: 0.4rem;
-    font-size: 1rem;
-    text-transform: uppercase;
-    &:hover {
-      background-color: #4e0eff;
-    }
-  }
-`;
