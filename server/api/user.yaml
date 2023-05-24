@@ -10,42 +10,48 @@ paths:
             content:
                application/json:
                   schema:
-                     $ref: "#/components/schemas/User"
+                     $ref: "#/components/schemas/Register"
                application/xml:
                   schema:
-                     $ref: "#/components/schemas/User"
+                     $ref: "#/components/schemas/Register"
                application/x-www-form-urlencoded:
                   schema:
-                     $ref: "#/components/schemas/User"
+                     $ref: "#/components/schemas/Register"
          responses:
             "200":
                description: successful operation
                content:
                   application/json:
                      schema:
-                        $ref: "#/components/schemas/User"
+                        $ref: "#/components/schemas/Register"
                   application/xml:
                      schema:
-                        $ref: "#/components/schemas/User"
+                        $ref: "#/components/schemas/Register"
    /login:
       get:
          tags:
             - user
          summary: Logs user into the system
          operationId: loginUser
-         description: ""
-         parameters:
-            - name: username
-            - name: password
+         requestBody:
+            description: Login user object
+            content:
+               application/json:
+                  schema:
+                     $ref: "#/components/schemas/Login"
+         responses:
+            "200":
+               description: successful operation
+               content:
+                  application/json:
+                     schema:
+                        $ref: "#/components/schemas/Login"            
 
 components:
    schemas:
-      User:
+      Register:
          type: object
          properties:
-            id:
-               type: string
-               example: 64440c0bd233bf8ec9a2144d
             username:
                type: string
                example: theUser
@@ -58,8 +64,20 @@ components:
             isAvatarImageSet:
                type: boolean
                example: false
+            avatarImage:
+               type: string
+               example: "PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMC…"
             createdAt:
                type: string
                example: "2023-05-10T08:33:48.254+00:00"
          xml:
             name: user
+      Login:
+         type: object
+         properties:
+            username:
+               type: string
+               example: theUser
+            password:
+               type: string
+               example: "$2b$10$5AeBJKDvQL97LdR9VrEyyuzARKi3bLdxg1kd4VzPR9uLV04HyNljG"
