@@ -10,7 +10,7 @@ const FormContainer = styled.div`
    flex-direction: row;
    justify-content: center;
    align-items: center;
-   background-color: #white;
+   background-color: #EDE7E3;
 
    form {
       justify-content: center;
@@ -25,19 +25,19 @@ const FormContainer = styled.div`
    input {
       background-color: transparent;
       padding: 1rem;
-      border: 0.1rem solid #0094ff;
+      border: 0.1rem solid #489FB5;
       border-radius: 0.4rem;
       color: black;
       width: 100%;
       font-size: 1rem;
       &:focus {
-         border: 0.1rem solid #997af0;
+         border: 0.1rem solid #FFA62B;
          outline: none;
       }
    }
    button {
       width: 100%;
-      background-color: #0094ff;
+      background-color: #489FB5;
       color: white;
       padding: 1rem 2rem;
       border: none;
@@ -47,7 +47,7 @@ const FormContainer = styled.div`
       font-size: 1rem;
       text-transform: uppercase;
       &:hover {
-         background-color: #4e0eff;
+         background-color: #82C0CC;
       }
    }
 
@@ -67,7 +67,7 @@ const FormContainer = styled.div`
       color: black;
       text-transform: uppercase;
       a {
-         color: #blue;
+         color: #489FB5;
          text-decoration: none;
          font-weight: bold;
       }

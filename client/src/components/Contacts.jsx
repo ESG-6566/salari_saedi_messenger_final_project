@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import Logo from "../../assets/logo2.svg";
+import Logout from "./Logout";
 
 export default function Contacts({ contacts, changeChat }) {
   const [currentUserName, setCurrentUserName] = useState(undefined);
   const [currentUserImage, setCurrentUserImage] = useState(undefined);
   const [currentSelected, setCurrentSelected] = useState(undefined);
 
+  //get logined user data from localStorage
   useEffect(() => {
     const setUserDatat = async () => {
       const data = await JSON.parse(
@@ -18,18 +19,28 @@ export default function Contacts({ contacts, changeChat }) {
     setUserDatat();
   }, []);
 
-  //selected user defining for click on chat event
+  //selected user defining for click chat event
   const changeCurrentChat = (index, contact) => {
     setCurrentSelected(index);
     changeChat(contact);
   };
 
-  return currentUserImage && currentUserName && (
+  return currentUserName && (
     <Container>
-      <div className="brand">
-          <image src={Logo} alt/>
-          <h3>app name</h3>
+      <div className="header">
+        <div className="current-user">
+          <div className="avatar">
+            <img src={`data:image/svg+xml;base64,${currentUserImage}`} alt="avatar"/>
+          </div>
+          <div className="username">
+            <h2>{currentUserName}</h2>
+          </div>
+        </div>
+        <div className="logoutButtonField">
+          <Logout />
+        </div>
       </div>
+      <div className="space"/>
       <div className="contacts">
           {contacts.map((contact,index)=>{
               return(
@@ -37,9 +48,9 @@ export default function Contacts({ contacts, changeChat }) {
                   key={contact._id}
                   onClick={() => changeCurrentChat(index, contact)}
                 >
-                <div className="avatar">
-                  <img src={`data:image/svg+xml;base64,${contact.avatarImage}`}alt=""/>
-                </div>
+                  <div className="avatar">
+                    <img src={`data:image/svg+xml;base64,${contact.avatarImage}`}alt=""/>
+                  </div>
                   <div className="username">
                       <h3>{contact.username}</h3>
                   </div>
@@ -47,38 +58,70 @@ export default function Contacts({ contacts, changeChat }) {
               )
           })}
       </div>
-      <div className="current-user">
-        <div className="avatar">
-          <img src={`data:image/svg+xml;base64,${currentUserImage}`} alt="avatar"/>
-        </div>
-        <div className="username">
-          <h2>{currentUserName}</h2>
-        </div>
-      </div>
+      <div className="footer"/>
     </Container>
   )
 }
 
-
 const Container = styled.div`
-  display: grid;
-  grid-template-rows: 10% 75% 15%;
+  flex-direction: column;
   overflow: hidden;
-  background-color: #080420;
-  .brand {
+  background-color: #16697A;
+  display: grid;
+  grid-template-rows: 6% 0.1% 93%;
+  height: 100vh;
+
+  .header{
+    flex-direction: row;
     display: flex;
-    align-items: center;
-    gap: 1rem;
-    justify-content: center;
-    img {
-      height: 2rem;
+    background-color: #489FB5;
+
+    .current-user {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      .avatar {
+        img {
+          border-radius: 50% ;
+          height: 3rem;
+        }
+      }
+      .username {
+        h2 {
+          color: white;
+        }
+      }
+      @media screen and (min-width: 720px) and (max-width: 1080px) {
+        gap: 0.5rem;
+        .username {
+          h2 {
+            font-size: 1rem;
+          }
+        }
+      }
     }
-    h3 {
-      color: white;
-      text-transform: uppercase;
+    .logoutButtonField{
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
   }
+    
+
+
+  .space{
+    height: 100%;
+    width: 100%;
+    background-color: #EDE7E3;
+  }
+
   .contacts {
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -87,13 +130,13 @@ const Container = styled.div`
     &::-webkit-scrollbar {
       width: 0.2rem;
       &-thumb {
-        background-color: #ffffff39;
+        background-color: #489FB5;
         width: 0.1rem;
         border-radius: 1rem;
       }
     }
     .contact {
-      background-color: #ffffff34;
+      background-color: #489FB5;
       min-height: 5rem;
       cursor: pointer;
       width: 90%;
@@ -105,6 +148,7 @@ const Container = styled.div`
       transition: 0.5s ease-in-out;
       .avatar {
         img {
+          border-radius: 50% ;
           height: 3rem;
         }
       }
@@ -115,34 +159,17 @@ const Container = styled.div`
       }
     }
     .selected {
-      background-color: #9a86f3;
-    }
-  }
-
-  .current-user {
-    background-color: #0d0d30;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 2rem;
-    .avatar {
-      img {
-        height: 4rem;
-        max-inline-size: 100%;
-      }
-    }
-    .username {
-      h2 {
-        color: white;
-      }
-    }
-    @media screen and (min-width: 720px) and (max-width: 1080px) {
-      gap: 0.5rem;
+      background-color: #82C0CC;
       .username {
-        h2 {
-          font-size: 1rem;
+        h3 {
+          color: black;
         }
       }
     }
+  }
+  
+  .footer{
+    width: 100%;
+    height: 100%;
   }
 `;

@@ -10,9 +10,9 @@ import "react-toastify/dist/ReactToastify.css";
 import loader from "../assets/loader.gif"
 import {setAvatarRoute} from "../utils/APIRoutes"
 import {Buffer} from "buffer";
-import {LogoField} from "./components/Logo field";
+import {LogoField} from "../components/Logo field";
 //a cpmponent for showing application Logo
-import {FormContainer} from "./components/User data field style";
+import {FormContainer} from "../components/User data field style";
 //a style cpmponent for user inputs form
 import normalPicture from "../assets/pexels.jpg";
 

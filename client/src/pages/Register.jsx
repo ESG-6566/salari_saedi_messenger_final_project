@@ -8,9 +8,9 @@ import { ToastContainer, toast } from "react-toastify";
 //React-Toastify allows you to add notifications to your app with ease. No more nonsense!
 import "react-toastify/dist/ReactToastify.css";
 import { registerRoute } from "../utils/APIRoutes";
-import {LogoField} from "./components/Logo field";
+import {LogoField} from "../components/Logo field";
 //a cpmponent for showing application Logo
-import {FormContainer} from "./components/User data field style";
+import {FormContainer} from "../components/User data field style";
 //a style cpmponent for user inputs form
 
 export default function Register() {
@@ -33,13 +33,13 @@ export default function Register() {
       confirmPassword: "",
    });
 
-   //The Effect Hook lets us perform side effects in function components
-   useEffect(() => {
-      //navigate to chat page if values are true and sets on local storage and dont stay in register page
-      if (localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)) {
-        navigate("/");
-      }
-    }, []);
+   // //The Effect Hook lets us perform side effects in function components
+   // useEffect(() => {
+   //    //navigate to chat page if values are true and sets on local storage and dont stay in register page
+   //    if (localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)) {
+   //      navigate("/");
+   //    }
+   //  }, []);
 
    const handleValidation = () => {
       //Checking the correctness of user inputs

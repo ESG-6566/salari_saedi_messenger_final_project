@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { BiPowerOff } from "react-icons/bi";
+import { RxExit } from "react-icons/rx";
 import styled from "styled-components";
 import axios from "axios";
 import { logoutRoute } from "../utils/APIRoutes";
@@ -9,6 +9,7 @@ import { logoutRoute } from "../utils/APIRoutes";
 export default function Logout() {
 
   const navigate = useNavigate();
+
   const handleClick = async () => {
     const id = await JSON.parse(
       localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
@@ -22,7 +23,7 @@ export default function Logout() {
 
   return (
     <Button onClick={handleClick}>
-      <BiPowerOff />
+      <RxExit />
     </Button>
   );
 }
@@ -33,11 +34,11 @@ const Button = styled.button`
   align-items: center;
   padding: 0.5rem;
   border-radius: 0.5rem;
-  background-color: #9a86f3;
+  background-color: #FFA62B;
   border: none;
   cursor: pointer;
   svg {
     font-size: 1.3rem;
-    color: #ebe7ff;
+    color: black;
   }
 `;
