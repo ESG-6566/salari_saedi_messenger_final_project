@@ -44,6 +44,8 @@ app.use(express.json());
 
 //* Routes
 app.use("/api/auth", require("./routes/userRoutes"));
+app.use("/api/messages", require("./routes/messagesRoute"));
+
 
 //* DB
 mongoose
