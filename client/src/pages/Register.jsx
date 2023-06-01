@@ -8,9 +8,9 @@ import { ToastContainer, toast } from "react-toastify";
 //React-Toastify allows you to add notifications to your app with ease. No more nonsense!
 import "react-toastify/dist/ReactToastify.css";
 import { registerRoute } from "../utils/APIRoutes";
-import {LogoField} from "../components/Logo field";
+import {LogoField} from "../components/LogoField";
 //a cpmponent for showing application Logo
-import {FormContainer} from "../components/User data field style";
+import {FormContainer} from "../components/UserDataFieldStyle";
 //a style cpmponent for user inputs form
 
 export default function Register() {

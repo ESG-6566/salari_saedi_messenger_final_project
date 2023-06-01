@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Logout from "./Logout";
+import SetAvatarButton from "./SetAvatarButton";
 
 export default function Contacts({ contacts, changeChat }) {
   const [currentUserName, setCurrentUserName] = useState(undefined);
@@ -30,14 +31,17 @@ export default function Contacts({ contacts, changeChat }) {
       <div className="header">
         <div className="current-user">
           <div className="avatar">
-            <img src={`data:image/svg+xml;base64,${currentUserImage}`} alt="avatar"/>
+            <img src={`data:image/svg+xml;base64,${currentUserImage}`} alt=""/>
           </div>
           <div className="username">
             <h2>{currentUserName}</h2>
           </div>
         </div>
-        <div className="logoutButtonField">
-          <Logout />
+        <div className="Button">
+          <SetAvatarButton/>
+        </div>
+        <div className="Button">
+          <Logout/>
         </div>
       </div>
       <div className="space"/>
@@ -68,7 +72,7 @@ const Container = styled.div`
   overflow: hidden;
   background-color: #16697A;
   display: grid;
-  grid-template-rows: 6% 0.1% 93%;
+  grid-template-rows: 7% 0.1% 92%;
   height: 100vh;
 
   .header{
@@ -82,7 +86,7 @@ const Container = styled.div`
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 1rem;
+      gap: 0.3rem;
       .avatar {
         img {
           border-radius: 50% ;
@@ -103,7 +107,7 @@ const Container = styled.div`
         }
       }
     }
-    .logoutButtonField{
+    .Button{
       width: 100%;
       height: 100%;
       display: flex;

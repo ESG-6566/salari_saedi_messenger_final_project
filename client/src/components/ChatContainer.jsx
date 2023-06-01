@@ -5,9 +5,10 @@ import { v4 as uuidv4 } from "uuid";
 import axios from "axios";
 import { sendMessageRoute, recieveMessageRoute } from "../utils/APIRoutes";
 
-export default function ChatContainer({ currentChat, socket }) {
-//   const [messages, setMessages] = useState([]);
-//   const scrollRef = useRef();
+export default function ChatContainer({ currentChat, socket}) {
+  const [messages, setMessages] = useState([]);
+  const scrollRef = useRef();
+  //useRef is a React Hook that lets you reference a value that’s not needed for rendering.
 //   const [arrivalMessage, setArrivalMessage] = useState(null);
 
 //   useEffect(async () => {
@@ -60,9 +61,9 @@ export default function ChatContainer({ currentChat, socket }) {
 //     arrivalMessage && setMessages((prev) => [...prev, arrivalMessage]);
 //   }, [arrivalMessage]);
 
-//   useEffect(() => {
-//     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
-//   }, [messages]);
+  useEffect(() => {
+    scrollRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
 
   return (
     <Container>
@@ -80,7 +81,7 @@ export default function ChatContainer({ currentChat, socket }) {
         </div>
       </div>
       <div className="chat-messages">
-        {/* {messages.map((message) => {
+        {messages.map((message) => {
           return (
             <div ref={scrollRef} key={uuidv4()}>
               <div
@@ -94,7 +95,7 @@ export default function ChatContainer({ currentChat, socket }) {
               </div>
             </div>
           );
-        })} */}
+        })}
       </div>
       <ChatInput/>
     </Container>
