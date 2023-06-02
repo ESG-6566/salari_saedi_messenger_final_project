@@ -45,8 +45,25 @@ paths:
                content:
                   application/json:
                      schema:
-                        $ref: "#/components/schemas/Login"            
-
+                        $ref: "#/components/schemas/Login"
+   /allusers/{id}:
+      get:
+         tags:
+            - user
+         summary: Get all users by id
+         operationId: allusers
+         requestBody:
+            description: get all users
+            content:
+               application/json:
+                  schema:
+                     $ref: "#/components/schemas/AllUsers"
+   /addmsg:
+      post:
+         tags: 
+            - user
+         operationId: addmsg
+                
 components:
    schemas:
       Register:
@@ -81,3 +98,18 @@ components:
             password:
                type: string
                example: "$2b$10$5AeBJKDvQL97LdR9VrEyyuzARKi3bLdxg1kd4VzPR9uLV04HyNljG"
+      AllUsers:
+         type: object
+         properties:
+            _id:
+               type: string
+               example: 646db7e5437ffaae5f2680fc
+            username:
+               type: string
+               example: theUser
+            email:
+               type: string
+               example: john@email.com               
+            avatarImage:
+               type: string
+               example: "PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMC…"
