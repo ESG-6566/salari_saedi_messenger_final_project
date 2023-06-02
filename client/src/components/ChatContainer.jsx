@@ -6,9 +6,9 @@ import axios from "axios";
 import { sendMessageRoute, recieveMessageRoute } from "../utils/APIRoutes";
 
 export default function ChatContainer({ currentChat, socket }) {
-   //   const [messages, setMessages] = useState([]);
-   //   const scrollRef = useRef();
-   //   const [arrivalMessage, setArrivalMessage] = useState(null);
+//   const [messages, setMessages] = useState([]);
+//   const scrollRef = useRef();
+//   const [arrivalMessage, setArrivalMessage] = useState(null);
 
    //   useEffect(async () => {
    //     const data = await JSON.parse(
@@ -60,27 +60,27 @@ export default function ChatContainer({ currentChat, socket }) {
    //     arrivalMessage && setMessages((prev) => [...prev, arrivalMessage]);
    //   }, [arrivalMessage]);
 
-   //   useEffect(() => {
-   //     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
-   //   }, [messages]);
+//   useEffect(() => {
+//     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
+//   }, [messages]);
 
-   return (
-      <Container>
-         <div className="chat-header">
-            <div className="user-details">
-               <div className="avatar">
-                  <img
-                     src={`data:image/svg+xml;base64,${currentChat.avatarImage}`}
-                     alt=""
-                  />
-               </div>
-               <div className="username">
-                  <h3>{currentChat.username}</h3>
-               </div>
-            </div>
-         </div>
-         <div className="chat-messages">
-            {/* {messages.map((message) => {
+  return (
+    <Container>
+      <div className="chat-header">
+        <div className="user-details">
+          <div className="avatar">
+            <img
+              src={`data:image/svg+xml;base64,${currentChat.avatarImage}`}
+              alt=""
+            />
+          </div>
+          <div className="username">
+            <h3>{currentChat.username}</h3>
+          </div>
+        </div>
+      </div>
+      <div className="chat-messages">
+        {/* {messages.map((message) => {
           return (
             <div ref={scrollRef} key={uuidv4()}>
               <div
@@ -95,10 +95,10 @@ export default function ChatContainer({ currentChat, socket }) {
             </div>
           );
         })} */}
-         </div>
-         <ChatInput />
-      </Container>
-   );
+      </div>
+      <ChatInput/>
+    </Container>
+  );
 }
 
 const Container = styled.div`

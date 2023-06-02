@@ -19,7 +19,6 @@ const FormContainer = styled.div`
       display: flex;
       flex-direction: column;
       gap: 2rem;
-      background-color: #white;
       padding: 3rem 5rem;
    }
    input {

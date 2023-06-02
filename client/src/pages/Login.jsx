@@ -4,13 +4,13 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 //The useNavigate hook returns a function that lets you navigate programmatically, in between pages
 // import Logo from "../assets/logo.svg";
-import {LogoField} from "../components/Logo field"
+import {LogoField} from "../components/LogoField"
 //a cpmponent for showing application Logo
 import { ToastContainer, toast } from "react-toastify";
 //React-Toastify allows you to add notifications to your app with ease. No more nonsense!
 import "react-toastify/dist/ReactToastify.css";
 import { loginRoute } from "../utils/APIRoutes";
-import {FormContainer} from "../components/User data field style";
+import {FormContainer} from "../components/UserDataFieldStyle";
 //a style cpmponent for user inputs form
 
 export default function Login() {

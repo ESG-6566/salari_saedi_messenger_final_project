@@ -39,11 +39,11 @@ const Button = styled.button`
   align-items: center;
   padding: 0.5rem;
   border-radius: 0.5rem;
-  background-color: #FFA62B;
+  background-color: #82C0CC;
   border: none;
   cursor: pointer;
   svg {
     font-size: 1.3rem;
-    color: black;
+    color: #16697A;
   }
 `;
