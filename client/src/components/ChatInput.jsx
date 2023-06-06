@@ -3,9 +3,8 @@ import styled from "styled-components";
 import Picker from "emoji-picker-react";
 import Smiley from "../assets/Smiley.svg"
 import SendIcon from "../assets/PaperPlaneRight.svg"
-import { Theme } from 'emoji-picker-react';
 
-export default function ChatInput(/*{ handleSendMsg: handleSend }*/) {
+export default function ChatInput({ handleSend }) {
   const [msg, setMsg] = useState("");
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   
@@ -23,19 +22,12 @@ export default function ChatInput(/*{ handleSendMsg: handleSend }*/) {
 
   
   const sendChat = (event) => {
-    alert(msg)
     event.preventDefault();
     if (msg.length > 0) {
-      handleSendMsg(msg);
+      handleSend(msg);
       setMsg("");
     }
   };
-
-  const handleSendMsg = async (msg) => {
-    const data = await JSON.parse(
-      localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
-    );
-  }
   
   return (
     <Container>

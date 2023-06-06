@@ -8,10 +8,10 @@ export default function Welcome() {
   const [userName, setUserName] = useState("");
 
   //geting user data to show in welcome message
+  const setUserDatat = async () => {
+    await JSON.parse(localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)).username
+  }
   useEffect(() => {
-    const setUserDatat = async () => {
-      await JSON.parse(localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)).username
-    }
     setUserDatat();
   }, []);
 

@@ -28,11 +28,11 @@ export default function SetAvatar() {
   };
 
   //navigate to login page if user not loged in
+  const notLogined =  async () => {
+    if (!localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY))
+      navigate("/login");
+  }
   useEffect(() => {
-    const notLogined =  async () => {
-      if (!localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY))
-        navigate("/login");
-    }
     notLogined();
   }, []);
 
