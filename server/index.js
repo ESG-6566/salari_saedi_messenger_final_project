@@ -46,7 +46,6 @@ app.use(express.json());
 app.use("/api/auth", require("./routes/userRoutes"));
 app.use("/api/messages", require("./routes/messagesRoute"));
 
-
 //* DB
 mongoose
    .connect(process.env.MONGO_URL, {
@@ -56,6 +55,29 @@ mongoose
    .then(() => console.log("DB Connection Successfull"))
    .catch((err) => console.log(err.message));
 
-app.listen(process.env.PORT, () =>
+const server = app.listen(process.env.PORT, () =>
    console.log(`Server Started on Port ${process.env.PORT}`)
 );
+
+//* Socket.io
+const socket = require("socket.io");
+const io = socket(server, {
+   cors: {
+      origin: "https://localhost:3000",
+      credentials: true,
+   },
+});
+
+global.onlineUsers = new Map();
+
+io.on("connection", (socket) => {
+   global.chatSocket = socket;
+   socket.on("add-user", (userId) => {
+      onlineUsers.set(userId, socket.id);
+   });
+
+   socket.on("send-msg", (data) => {
+      const sendUserSocket = onlineUsers.get(data.to);
+      sendUserSocket && socket.to(sendUserSocket).emit("msg-recieve", data.msg);
+   });
+});
