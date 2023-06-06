@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
+//`useRef` is a React Hook that lets you reference a value that’s not needed for rendering.
 import styled from "styled-components";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -7,6 +8,10 @@ import { allUsersRoute, host } from "../utils/APIRoutes";
 import Welcome from "../components/Welcome";
 import ChatContainer from "../components/ChatContainer";
 import { io } from "socket.io-client";
+
+/*the chat page*/
+/*using contacts component to show contacts to user*/
+/* using chatContainer component*/
 
 export default function Chat(){
 
@@ -17,26 +22,26 @@ export default function Chat(){
   const [currentUser, setCurrentUser] = useState(undefined);
   const [currentChat, setCurrentChat] = useState(undefined);
   
-  useEffect(()=>{
-    const UserLoginStatus = async () => {
-      //check if user not loged or login data not stored in localStorage, then navigate to login page
-      if (!localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)) {
-        navigate("/login");
-        //else get data and set on `setCurrentUser` varable
-      } else{
-        setCurrentUser(await JSON.parse(localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)));
-      }
+  const UserLoginStatus = async () => {
+    //check if user not loged or login data not stored in localStorage, then navigate to login page
+    if (!localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)) {
+      navigate("/login");
+      //else get data and set on `setCurrentUser` varable
+    } else{
+      setCurrentUser(await JSON.parse(localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)));
     }
+  }
+  useEffect(()=>{
     UserLoginStatus();
   },[])
 
   //geting datas of other users to show in contacts field
+  const getUserData = async () => {
+    const data = await axios.get(`${allUsersRoute}/${currentUser._id}`);
+    setContacts(data.data);
+  }
   useEffect(()=>{
     if(currentUser){
-      const getUserData = async () => {
-        const data = await axios.get(`${allUsersRoute}/${currentUser._id}`);
-        setContacts(data.data);
-      }
       getUserData();
     }
   },[currentUser])
@@ -46,6 +51,17 @@ export default function Chat(){
   const handleChatChange = (chat) => {
     setCurrentChat(chat);
   };
+
+  useEffect(() => {
+    if (currentUser) {
+      /* useRef has a property called "current" used to retrieve the value of the referenced object at any time
+      while also accepting an initial value as an argument.
+      You can change the value of a referenced object by updating the current value.*/
+      socket.current = io(host);
+      // The Socket.IO API is inspired from the Node.js EventEmitter, which means you can emit events on one side and register listeners on the other
+      socket.current.emit("add-user", currentUser._id);
+    }
+  }, [currentUser]);
   
   return (
     <Container>
@@ -54,7 +70,7 @@ export default function Chat(){
         {currentChat === undefined ? (
           <Welcome />
         ) : (
-          <ChatContainer currentChat={currentChat} socket={socket} />
+          <ChatContainer currentChat={currentChat}/>
         )}
       </div>
     </Container>
@@ -86,7 +102,7 @@ const Container = styled.div`
     }
   }
   .container {
-    : 100%height;
+    height: 100%;
     width: 100vw;
     background-color: #16697A;
     display: grid;

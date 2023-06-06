@@ -1,5 +1,5 @@
 import React from "react";
-import Logo2 from "../assets/logo2.svg";
+import Logo2 from "../assets/logo.svg";
 import styled from "styled-components";
 
 function LogoField() {

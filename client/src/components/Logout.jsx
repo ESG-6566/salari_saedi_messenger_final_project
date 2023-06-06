@@ -43,7 +43,10 @@ const Button = styled.button`
   border: none;
   cursor: pointer;
   svg {
-    font-size: 1.3rem;
-    color: #16697A;
+  font-size: 1.5rem;
+  color: #16697A;
+    }
+  &:hover {
+    background-color: #EDE7E3;
   }
 `;

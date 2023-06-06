@@ -77,7 +77,10 @@ const Container = styled.div`
 
   .header{
     flex-direction: row;
-    display: flex;
+    overflow: hidden;
+    background-color: #16697A;
+    display: grid;
+    grid-template-columns: 50% 25% 25%;
     background-color: #489FB5;
 
     .current-user {
