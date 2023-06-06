@@ -70,7 +70,7 @@ export default function Chat(){
         {currentChat === undefined ? (
           <Welcome />
         ) : (
-          <ChatContainer currentChat={currentChat}/>
+          <ChatContainer currentChat={currentChat} socket={socket}/>
         )}
       </div>
     </Container>
