@@ -16,27 +16,27 @@ const userSchema = new mongoose.Schema({
       min: 11,
       max: 64,
       unique: true,
-      trim: true
+      trim: true,
    },
    password: {
       type: String,
       required: [true, "password is required"],
       min: 8,
       max: 25,
-      trim: true
+      trim: true,
    },
    createdAt: {
       type: Date,
       default: Date.now,
    },
-   // isAvatarImageSet: {
-   //    type: Boolean,
-   //    default: false,
-   // },
-   // avatarImage: {
-   //    type: String,
-   //    default: "",
-   // },
+   isAvatarImageSet: {
+      type: Boolean,
+      default: false,
+   },
+   avatarImage: {
+      type: String,
+      default: "",
+   },
 });
 
 userSchema.statics.userValidation = function (body) {

@@ -9,36 +9,55 @@ import { sendMessageRoute, recieveMessageRoute } from "../utils/APIRoutes";
 //using ChatIput component
 
 export default function ChatContainer({ currentChat, socket }) {
-
    const [messages, setMessages] = useState([]);
    const scrollRef = useRef();
    const [arrivalMessage, setArrivalMessage] = useState(null);
 
+   useEffect(async () => {
+      const data = await JSON.parse(
+         localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
+      );
+      const response = await axios.post(recieveMessageRoute, {
+         from: data._id,
+         to: currentChat._id,
+      });
+      setMessages(response.data);
+   }, [currentChat]);
+
+   useEffect(() => {
+      const getCurrentChat = async () => {
+         currentChat &&
+            (await JSON.parse(localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY))
+               ._id);
+      };
+      getCurrentChat();
+   }, [currentChat]);
+
    const handleSendMsg = async (msg) => {
       const data = await JSON.parse(
-      localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
+         localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
       );
       socket.current.emit("send-msg", {
-      to: currentChat._id,
-      from: data._id,
-      msg,
+         to: currentChat._id,
+         from: data._id,
+         msg,
       });
       await axios.post(sendMessageRoute, {
-      from: data._id,
-      to: currentChat._id,
-      message: msg,
+         from: data._id,
+         to: currentChat._id,
+         message: msg,
       });
 
       const msgs = [...messages];
       msgs.push({ fromSelf: true, message: msg });
       setMessages(msgs);
    };
-   
+
    useEffect(() => {
       if (socket.current) {
          socket.current.on("msg-recieve", (msg) => {
             setArrivalMessage({ fromSelf: false, message: msg });
-       });
+         });
       }
    }, []);
 
@@ -46,74 +65,47 @@ export default function ChatContainer({ currentChat, socket }) {
    //These three dots are called the spread syntax
    //Spread syntax allows you to deconstruct an array or object into separate variables.
    useEffect(() => {
-     arrivalMessage && setMessages((prev) => [...prev, arrivalMessage]);
+      arrivalMessage && setMessages((prev) => [...prev, arrivalMessage]);
    }, [arrivalMessage]);
-   
+
    //cscrollin messages
    useEffect(() => {
-     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
+      scrollRef.current?.scrollIntoView({ behavior: "smooth" });
    }, [messages]);
-   
-   const msgSet = async () =>{
-      const data = await JSON.parse(
-        localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
-      );
-      const response = await axios.post(recieveMessageRoute, {
-        from: data._id,
-        to: currentChat._id,
-      });
-      setMessages(response.data);
-   }
-   useEffect(() => {
-      msgSet();
-   },[currentChat]);
 
-   useEffect(() => {
-      const getCurrentChat = async () => {
-      if (currentChat) {
-         await JSON.parse(
-            localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
-         )._id;
-      }
-      };
-      getCurrentChat();
-   }, [currentChat]);
-
-  return (
-    <Container>
-      <div className="chat-header">
-        <div className="user-details">
-          <div className="avatar">
-            <img
-              src={`data:image/svg+xml;base64,${currentChat.avatarImage}`}
-              alt=""
-            />
-          </div>
-          <div className="username">
-            <h3>{currentChat.username}</h3>
-          </div>
-        </div>
-      </div>
-      <div className="chat-messages">
-        {messages.map((message) => {
-          return (
-            <div ref={scrollRef} key={uuidv4()}>
-              <div
-                className={`message ${
-                  message.fromSelf ? "sended" : "recieved"
-                }`}
-              >
-                <div className="content ">
-                  <p>{message.message}</p>
-                </div>
-              </div>
+   return (
+      <Container>
+         <div className="chat-header">
+            <div className="user-details">
+               <div className="avatar">
+                  <img
+                     src={`data:image/svg+xml;base64,${currentChat.avatarImage}`}
+                     alt=""
+                  />
+               </div>
+               <div className="username">
+                  <h3>{currentChat.username}</h3>
+               </div>
             </div>
-          );
-        })}
-      </div>
-      <ChatInput handleSend={handleSendMsg}/>
-    </Container>
-  );
+         </div>
+         <div className="chat-messages">
+            {messages.map((message) => {
+               return (
+                  <div ref={scrollRef} key={uuidv4()}>
+                     <div
+                        className={`message ${message.fromSelf ? "sended" : "recieved"}`}
+                     >
+                        <div className="content ">
+                           <p>{message.message}</p>
+                        </div>
+                     </div>
+                  </div>
+               );
+            })}
+         </div>
+         <ChatInput handleSend={handleSendMsg} />
+      </Container>
+   );
 }
 
 const Container = styled.div`
@@ -154,7 +146,7 @@ const Container = styled.div`
       &::-webkit-scrollbar {
          width: 0.2rem;
          &-thumb {
-            background-color: #489FB5;
+            background-color: #489fb5;
             width: 0.1rem;
             border-radius: 1rem;
          }
@@ -177,13 +169,13 @@ const Container = styled.div`
       .sended {
          justify-content: flex-end;
          .content {
-            background-color: #FFA62B;
+            background-color: #ffa62b;
          }
       }
       .recieved {
          justify-content: flex-start;
          .content {
-            background-color: #489FB5;
+            background-color: #489fb5;
          }
       }
    }
