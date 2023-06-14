@@ -4,7 +4,7 @@ import Picker from "emoji-picker-react";
 import Smiley from "../assets/Smiley.svg"
 import SendIcon from "../assets/PaperPlaneRight.svg"
 
-export default function ChatInput({ handleSend }) {
+export default function ChatInput({ handleSendMsg }) {
   const [msg, setMsg] = useState("");
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   
@@ -24,7 +24,7 @@ export default function ChatInput({ handleSend }) {
   const sendChat = (event) => {
     event.preventDefault();
     if (msg.length > 0) {
-      handleSend(msg);
+      handleSendMsg(msg);
       setMsg("");
     }
   };

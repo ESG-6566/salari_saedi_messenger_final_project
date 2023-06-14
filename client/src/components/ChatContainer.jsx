@@ -26,9 +26,9 @@ export default function ChatContainer({ currentChat, socket }) {
 
    useEffect(() => {
       const getCurrentChat = async () => {
-         currentChat &&
-            (await JSON.parse(localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY))
-               ._id);
+         if (currentChat)
+            await JSON.parse(localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY))
+               ._id;
       };
       getCurrentChat();
    }, [currentChat]);
@@ -103,7 +103,7 @@ export default function ChatContainer({ currentChat, socket }) {
                );
             })}
          </div>
-         <ChatInput handleSend={handleSendMsg} />
+         <ChatInput handleSendMsg={handleSendMsg} />
       </Container>
    );
 }

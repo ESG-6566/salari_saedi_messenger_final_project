@@ -46,6 +46,25 @@ paths:
                   application/json:
                      schema:
                         $ref: "#/components/schemas/Login"
+   /setAvatar:
+      post:
+         tags:
+            - user
+         summary: set Avatar user
+         operationId: setAvatar
+         requestBody:
+            description: set Avatar user
+            content:
+               application/json:
+                  schema:
+                     $ref: "#/components/schemas/SetAvatar"
+         responses:
+            "200":
+               description: successful operation
+               content:
+                  application/json:
+                     schema:
+                        $ref: "#/components/schemas/SetAvatar"
    /allusers/{id}:
       get:
          tags:
@@ -60,10 +79,30 @@ paths:
                      $ref: "#/components/schemas/AllUsers"
    /addmsg:
       post:
-         tags: 
+         tags:
             - user
+         summary: Add message
          operationId: addmsg
-                
+         requestBody:
+            description: add message
+            content:
+               application/json:
+                  schema:
+                     $ref: "#/components/schemas/Addmsg"
+
+   /getmsg:
+      post:
+         tags:
+            - user
+         summary: Get message
+         operationId: getmsg
+         requestBody:
+            description: get message
+            content:
+               application/json:
+                  schema:
+                     $ref: "#/components/schemas/Getmsg"
+
 components:
    schemas:
       Register:
@@ -98,6 +137,18 @@ components:
             password:
                type: string
                example: "$2b$10$5AeBJKDvQL97LdR9VrEyyuzARKi3bLdxg1kd4VzPR9uLV04HyNljG"
+      SetAvatar:
+         type: object
+         properties:
+            _id:
+               type: string
+               example: 646db7e5437ffaae5f2680fc
+            avatarImage:
+               type: string
+               example: "PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMC…"
+            isAvatarImageSet:
+               type: boolean
+               example: true
       AllUsers:
          type: object
          properties:
@@ -109,7 +160,28 @@ components:
                example: theUser
             email:
                type: string
-               example: john@email.com               
+               example: john@email.com
             avatarImage:
                type: string
                example: "PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMC…"
+      Addmsg:
+         type: object
+         properties:
+            message:
+               type: object
+               example: { text: Hello }
+            users:
+               type: array
+               example: ["64894c74241efbea10310e29", "64894c99241efbea10310e30"]
+            sender:
+               type: string
+               example: 64894c74241efbea10310e29
+      Getmsg:
+         type: object
+         properties:
+            fromSelf:
+               type: boolean
+               example: true
+            message:
+               type: string
+               example: Hello
