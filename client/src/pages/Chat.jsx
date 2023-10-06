@@ -78,12 +78,12 @@ export default function Chat(){
 }
 
 const Container = styled.div`
-  flex-direction: column;
-  overflow: hidden;
-  background-color: #16697A;
-  align-items: center;
   height: 100vh;
   width: 100vw;
+  flex-direction: column;
+  //overflow: hidden;
+  background-color: #16697A;
+  align-items: center;
 
   .brand {
     width: 100vw;

@@ -109,18 +109,19 @@ export default function ChatContainer({ currentChat, socket }) {
 }
 
 const Container = styled.div`
-   display: grid;
-   grid-template-rows: 10% 80% 10%;
+   display: flex;
+   flex-direction: column;
    gap: 0.1rem;
    overflow: hidden;
-   @media screen and (min-width: 720px) and (max-width: 1080px) {
-      grid-template-rows: 15% 70% 15%;
-   }
+   min-width: 500px;
+
    .chat-header {
+      height: 50px;
       display: flex;
-      justify-content: space-between;
+      justify-content: left;
       align-items: center;
       padding: 0 2rem;
+      min-height: 60px;
       .user-details {
          display: flex;
          align-items: center;
@@ -138,6 +139,7 @@ const Container = styled.div`
       }
    }
    .chat-messages {
+      height: 100%;
       padding: 1rem 2rem;
       display: flex;
       flex-direction: column;

@@ -114,14 +114,16 @@ export default function SetAvatar() {
 }
 
 const Container = styled.div`
+  height: 100vh;
+  width: 100vw;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   gap: 3rem;
   background-color: #16697A;
-  height: 100vh;
-  width: 100vw;
+  min-width: 1000px;
+  min-height: 500px;
 
   .loader {
     max-inline-size: 100%;

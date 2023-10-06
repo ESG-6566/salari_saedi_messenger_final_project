@@ -65,19 +65,19 @@ const EmojiButton = styled.div`
   cursor: pointer;
   img{
     width: 2vw;
+    min-width: 30px;
+    min-height: 30px;
   }
 `;
 
 const Container = styled.div`
+  height: 50px;
   display: flex;
   flex-direction: row;
   align-items: center;
   //background-color: #489FB5;
   padding: 0 2rem;
-  @media screen and (min-width: 720px) and (max-width: 1080px) {
-    padding: 0 1rem;
-    gap: 1rem;
-  }
+
   .pickerStyle{
     // position: fixed;
     // left: 10%;
@@ -117,7 +117,6 @@ const Container = styled.div`
     align-items: center;
     justify-content: center;
     color: white;
-    gap: 1rem;
     /* .emoji {
       //   .emoji-picker-react {
       // position: absolute;
@@ -151,7 +150,7 @@ const Container = styled.div`
     } */
   }
   .input-container {
-    height: 40%;
+    height: 60%;
     //padding: 0.4rem;
     width: 100%;
     border-radius: 2rem;
@@ -193,6 +192,8 @@ const Container = styled.div`
 
     img{
       width: 2vw;
+      min-width: 25px;
+      min-height: 25px;
     }
     @media screen and (min-width: 720px) and (max-width: 1080px) {
       padding: 0.3rem 1rem;
