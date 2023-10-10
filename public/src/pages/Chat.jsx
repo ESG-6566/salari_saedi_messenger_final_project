@@ -9,6 +9,8 @@ import ChatContainer from "../components/ChatContainer";
 import Contacts from "../components/Contacts";
 import Welcome from "../components/Welcome";
 
+
+
 /*the chat page*/
 /*using contacts component to show contacts to user*/
 /* using chatContainer component*/
@@ -64,7 +66,9 @@ export default function Chat() {
     <>
       <Container>
         <div className="container">
+        
           <Contacts contacts={contacts} changeChat={handleChatChange} />
+         
           {currentChat === undefined ? (
             <Welcome />
           ) : (

@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import ChatInput from "./ChatInput";
-import Logout from "./Logout";
 import { v4 as uuidv4 } from "uuid";
 import axios from "axios";
 import { sendMessageRoute, recieveMessageRoute } from "../utils/APIRoutes";
@@ -94,7 +93,6 @@ export default function ChatContainer({ currentChat, socket }) {
             <h3>{currentChat.username}</h3>
           </div>
         </div>
-        <Logout />
       </div>
       <div className="chat-messages">
         {messages.map((message) => {
@@ -119,6 +117,7 @@ export default function ChatContainer({ currentChat, socket }) {
 }
 
 const Container = styled.div`
+border: .6rem solid #00000076;
   display: grid;
   grid-template-rows: 10% 80% 10%;
   gap: 0.1rem;
