@@ -39,10 +39,10 @@ export default function Login() {
   const validateForm = () => {
     const { username, password } = values;
     if (username === "") {
-      toast.error("Email and Password is required.", toastOptions);
+      toast.error("Username/Email and Password is required.", toastOptions);
       return false;
     } else if (password === "") {
-      toast.error("Email and Password is required.", toastOptions);
+      toast.error("Username/Email and Password is required.", toastOptions);
       return false;
     }
     return true;
@@ -85,7 +85,7 @@ export default function Login() {
           </div>
           <input
             type="text"
-            placeholder="Username"
+            placeholder="Username/Email"
             name="username"
             onChange={(e) => handleChange(e)}
             min="3"
