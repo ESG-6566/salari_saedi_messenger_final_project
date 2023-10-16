@@ -123,6 +123,9 @@ const Container = styled.div`
       &:focus {
         outline: none;
       }
+      ::placeholder {
+        color: #999;
+      }
     }
     button {
       padding: 0.3rem 2rem;

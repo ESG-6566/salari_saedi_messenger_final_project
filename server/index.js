@@ -28,6 +28,7 @@ app.use("/api/messages", messageRoutes);
 const server = app.listen(process.env.PORT, () =>
   console.log(`Server started on ${process.env.PORT}`)
 );
+
 const io = socket(server, {
   cors: {
     origin: "http://localhost:3000",
@@ -36,13 +37,13 @@ const io = socket(server, {
 });
 
 global.onlineUsers = new Map();
-io.on("connection", (socket) => {
+io.on("connection", (socket) => {   
   global.chatSocket = socket;
-  socket.on("add-user", (userId) => {
+  socket.on("add-user", (userId) => {   
     onlineUsers.set(userId, socket.id);
   });
 
-  socket.on("send-msg", (data) => {
+  socket.on("send-msg", (data) => {   // data = { to: '6525858cdfe126b9ca8b0f2d', from: '652585dddfe126b9ca8b0f42',  msg: 'message' }
     const sendUserSocket = onlineUsers.get(data.to);
     if (sendUserSocket) {
       socket.to(sendUserSocket).emit("msg-recieve", data.msg);
