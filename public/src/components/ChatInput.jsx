@@ -118,7 +118,7 @@ const Container = styled.div`
       font-size: 1.2rem;
 
       &::selection {
-        background-color: #20BF55;
+        background-color: #01BAEF;
       }
       &:focus {
         outline: none;

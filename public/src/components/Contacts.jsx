@@ -112,11 +112,12 @@ const Container = styled.div`
       }
       .contact {
          background-color: #ffffff34;
+         backdrop-filter: blur(60px);
          min-height: 5rem;
          cursor: pointer;
          width: 90%;
-         border-radius: 0.2rem;
-         padding: 0.4rem;
+         border-radius: 0.9rem;
+         padding: 0.4rem 0.4rem 0.4rem 1rem;
          display: flex;
          gap: 1rem;
          align-items: center;
@@ -133,7 +134,7 @@ const Container = styled.div`
          }
       }
       .selected {
-         background-color: #20bf55;
+         background-color: #01BAEF;
       }
    }
 

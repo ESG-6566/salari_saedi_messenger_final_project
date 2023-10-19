@@ -155,8 +155,8 @@ border: .6rem solid #00000076;
     &::-webkit-scrollbar {
       width: 0.2rem;
       &-thumb {
-        background-color: #ffffff39;
-        width: 0.1rem;
+        background-color: #00000076;
+        width: 0.2rem;
         border-radius: 1rem;
       }
     }
@@ -178,13 +178,13 @@ border: .6rem solid #00000076;
     .sended {
       justify-content: flex-end;
       .content {
-        background-color: #01BAEF;
+        background-color: #00000076;
       }
     }
     .recieved {
       justify-content: flex-start;
       .content {
-        background-color: #20BF55;
+        background-color: #01BAEF;
       }
     }
   }
